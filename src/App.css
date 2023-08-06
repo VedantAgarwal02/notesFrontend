@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+
+#authNavbar { 
+  background-color: #232020;
+  color: rgb(176, 172, 172);
+}
+
+@media only screen and (max-width: 600px){
+  #loginForm{
+    display: inline-block;
+  }
+}
