@@ -11,4 +11,13 @@ const normalizeText = (text) => {
     return flat
 }
 
-module.exports = normalizeText
+const camelCaseText = (str)=> {
+    let ans = str.toLowerCase()
+ 
+    // Returning string to camelcase
+    ans = ans.split(" ").reduce((s, c) => s + (c.charAt(0).toUpperCase() + c.slice(1)));
+
+    return ans;
+}
+
+module.exports = {normalizeText, camelCaseText}

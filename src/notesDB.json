@@ -1,49 +1,49 @@
 [
     {
-        "branch":"cse",
+        "branch":"computerScience",
         "year":"second",
         "subject":"computerNetworks",
         "link":"abc",
         "contributorId":"23"
     },
     {
-        "branch":"cse",
+        "branch":"computerScience",
         "year":"third",
         "subject":"databaseManagementSystem",
         "link":"abc",
         "contributorId":"23"
     },
     {
-        "branch":"cse",
+        "branch":"mechanical",
         "year":"second",
         "subject":"computerNetworks",
         "link":"abc",
         "contributorId":"23"
     },
     {
-        "branch":"cse",
-        "year":"second",
+        "branch":"civil",
+        "year":"first",
         "subject":"computerNetworks",
         "link":"abc",
         "contributorId":"23"
     },
     {
-        "branch":"cse",
+        "branch":"computerScience",
         "year":"second",
         "subject":"computerNetworks",
         "link":"google.com",
         "contributorId":"23"
     },
     {
-        "branch":"cse",
-        "year":"second",
+        "branch":"chemical",
+        "year":"third",
         "subject":"computerNetworks",
         "link":"abc",
         "contributorId":"23"
     },
     {
-        "branch":"cse",
-        "year":"second",
+        "branch":"mechanical",
+        "year":"fourth",
         "subject":"computerNetworks",
         "link":"abc",
         "contributorId":"23"

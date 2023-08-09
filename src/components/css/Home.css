@@ -1,11 +1,18 @@
+.main {
+    margin:auto;
+    width: 80%;
+}
+
 .main > h3 {
     font-weight: 700;
-    margin-top: 5px;
+    margin-top:5px;
+}
+
+#selectFilter {
+    width: 100px;
 }
 
 #notes {
-    margin:auto;
-    width: 80%;
     display: flex;
     flex-wrap: wrap;
 }
