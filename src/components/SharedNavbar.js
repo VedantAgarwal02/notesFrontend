@@ -6,9 +6,10 @@ import {normalizeText} from '../textConverter';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const SharedNavbar = () => {
-  const [user, setUser] = useState("Fetching Name...");
+  const [user, setUser] = useState({username:"--Fetching Your Name--"});
   const navigate = useNavigate()
   useEffect(()=> {
     let temp = window.localStorage.getItem('user')
@@ -19,19 +20,24 @@ const SharedNavbar = () => {
   const logout = ()=> {
     if(window.confirm('Are you sure you want to logout?')){
       window.localStorage.removeItem('user')
-      // Cookies.remove('token')
+      Cookies.remove('token')
       navigate('/auth/login')
      }
   }
 
+  const imgStyle = {
+    width:'30px',
+    height:'30px',
+    margin:'5px'
+}
+
   return (
     <Navbar bg="primary" data-bs-theme="dark">
       <Container>
-      <Navbar.Brand style={{cursor:"pointer"}}>Notes Site</Navbar.Brand>
+      <img src="https://cdn-icons-png.flaticon.com/512/564/564445.png" alt="logo" style={imgStyle} />
+      <Navbar.Brand style={{cursor:"pointer"}} onClick={()=> navigate('/')} >Notes Site</Navbar.Brand>
           <Nav className="me-auto">
-          {/* <Nav.Link >
-            {userRole==='employer'?'Post Job Opening':'View your applications'}
-          </Nav.Link> */}
+          {user?.role==='contributor' && <Nav.Link onClick={()=> navigate('/postnotes')} >Post Notes</Nav.Link> }
           <NavDropdown title="Options" id="basic-nav-dropdown">
               <NavDropdown.Item >Profile Page</NavDropdown.Item>
               <NavDropdown.Item onClick={()=> logout()} >Logout</NavDropdown.Item>
@@ -39,7 +45,7 @@ const SharedNavbar = () => {
           </Nav>
           <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            Signed in as: {user?.email} 
+            Signed in as: {user?.username} 
           </Navbar.Text>
         </Navbar.Collapse>
       </Container>

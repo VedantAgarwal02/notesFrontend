@@ -4,11 +4,17 @@ import Form from 'react-bootstrap/Form';
 import './css/Signup.css'
 import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import link from '../backendLink'
+import Cookies from 'js-cookie';
 
-const Signup = () => {
+const Signup = ({changeLoading}) => {
   const [isContributor, setIsContributor] = useState(true)
   const navigate = useNavigate()
-  const handleSubmit = () => {
+  const handleSubmit = async() => {
+
+    changeLoading(true, "Signing Up")
+    
     const name = document.getElementById('name').value
     const email = document.getElementById('email').value
     const password = document.getElementById('password').value
@@ -17,17 +23,34 @@ const Signup = () => {
 
     if(!name || !email || !password || !confirmPassword) {
       alert('Please enter all details')
+      changeLoading(false)
       return
     }
-
+    
     if(password !== confirmPassword) {
       alert('Password and ConfirmPassword do not match')
+      changeLoading(false)
       return
     }
 
-    window.localStorage.setItem('user', JSON.stringify({name, email, password, role}))
-    // console.log(name, email, password, confirmPassword, role);
-    navigate('/')
+    try {
+      const resp=await axios.post(`${link}/api/v1/auth/register`, {email, password, username:name, role});
+
+      if(resp.status===201) {
+        window.localStorage.setItem( 'user', JSON.stringify({...resp.data.details, role}))
+        Cookies.set('token', resp.data.token)
+        navigate('/')
+      }
+      else {
+        console.log("Error in Signup")
+      }
+    }
+    catch(error) {
+      console.log(error);
+      alert('some error occurred')
+    }
+
+    changeLoading(false);
   }
   return (
     <div id='signup'>

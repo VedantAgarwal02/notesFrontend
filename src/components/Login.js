@@ -5,24 +5,44 @@ import './css/Login.css'
 import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import axios from 'axios';
+import link from '../backendLink'
+import Cookies from 'js-cookie';
 
-const Login = () => {
+const Login = ({changeLoading}) => {
   const [isContributor, setIsContributor] = useState(true)
 
   const navigate = useNavigate()
-  const handleClick = () => {
-    const role = isContributor ? 'contributor' : 'student'
+  const handleClick = async () => {
+    changeLoading(true, "Logging In")
+    const role = isContributor ? 'contributor' : 'user'
     const email = document.getElementById('email').value
     const password = document.getElementById('password').value
 
     if(!email || !password) {
       alert('Please provide all details.')
+      changeLoading(false);
       return
     }
 
-    console.log(typeof email, password)
-    window.localStorage.setItem('user', JSON.stringify({role, email, password}))
-    navigate('/')
+    try {
+      const resp = await axios.post(`${link}/api/v1/auth/login`, {email, password, role});
+      
+      if(resp.status===200) {
+        window.localStorage.setItem( 'user', JSON.stringify({...resp.data.details, role}))
+        Cookies.set('token', resp.data.token)
+        navigate('/')
+      }
+      else {
+        console.log("Error in logging in")
+      }
+    }
+    catch(error) {
+      console.log(error)
+      alert('Some Error Occured')
+    }
+    
+    changeLoading(false)
   }
 
   return (
