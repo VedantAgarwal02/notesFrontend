@@ -11,6 +11,8 @@ import PostNotes from './components/PostNotes';
 import ContactUs from './components/ContactUs';
 import Cookies from 'js-cookie';
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const [loading, setLoading] = useState(false); 
@@ -26,7 +28,10 @@ function App() {
       
     {loading && 
     <section id="loading">
-      <p>{message}...</p>
+      <p>
+        {message}...
+      <FontAwesomeIcon icon={faSpinner} />
+      </p>
     </section>
     }
 
