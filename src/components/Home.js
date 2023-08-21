@@ -41,7 +41,7 @@ const Home = ({changeLoading}) => {
     }
     catch(error) {
       alert("Some Error Occured")
-      console.log('some error2')
+      console.log(error)
     }
     changeLoading(false)
   }

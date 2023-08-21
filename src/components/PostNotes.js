@@ -31,7 +31,7 @@ const PostNotes =  ({changeLoading}) => {
       })
 
       if(resp.status===200) {
-        // alert('Note Created Successfully')
+        alert('Note Created Successfully')
         navigate('/')
       }
       else {
